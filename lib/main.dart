@@ -67,7 +67,12 @@ class AppColors {
 }
 
 class ApiService {
-  ApiService({this.baseUrl = 'http://localhost:3000/api'});
+  ApiService({
+    this.baseUrl = const String.fromEnvironment(
+      'API_BASE_URL',
+      defaultValue: 'http://localhost:3000/api',
+    ),
+  });
 
   final String baseUrl;
 
