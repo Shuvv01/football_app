@@ -68,19 +68,32 @@ class AppColors {
 
 class ApiService {
   ApiService({
-    this.baseUrl = const String.fromEnvironment(
-      'API_BASE_URL',
-      defaultValue: 'http://localhost:3000/api',
+    this.supabaseUrl = const String.fromEnvironment(
+      'SUPABASE_URL',
+      defaultValue: 'https://htarixcmexcjgocobitw.supabase.co',
+    ),
+    this.supabaseAnonKey = const String.fromEnvironment(
+      'SUPABASE_ANON_KEY',
+      defaultValue:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh0YXJpeGNtZXhjamdvY29iaXR3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyNDE3MTUsImV4cCI6MjA5NTgxNzcxNX0.H2dGTQucL07K_PGWGOpFhWbIZt4QfQydx3-EJ1fvgeA',
     ),
   });
 
-  final String baseUrl;
+  static const String adminEmail = 'shuvamgtm11@gmail.com';
+
+  final String supabaseUrl;
+  final String supabaseAnonKey;
+
+  String get _restUrl => '$supabaseUrl/rest/v1';
 
   Future<List<T>> fetchList<T>(
     String collection,
     T Function(Map<String, dynamic> json) fromJson,
   ) async {
-    final response = await http.get(Uri.parse('$baseUrl/$collection'));
+    final response = await http.get(
+      Uri.parse('$_restUrl/$collection?select=*'),
+      headers: _headers(),
+    );
 
     if (response.statusCode != 200) {
       throw Exception('Could not load $collection');
@@ -96,17 +109,52 @@ class ApiService {
     required String email,
     required String memberId,
   }) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/auth/login'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'email': email, 'memberId': memberId}),
+    final cleanEmail = email.trim().toLowerCase();
+    final existingResponse = await http.get(
+      Uri.parse('$_restUrl/members?email=eq.$cleanEmail&select=*'),
+      headers: _headers(),
     );
 
-    if (response.statusCode != 200) {
+    if (existingResponse.statusCode != 200) {
       throw Exception('Login failed');
     }
 
-    return Map<String, dynamic>.from(jsonDecode(response.body));
+    final List<dynamic> existingMembers = jsonDecode(existingResponse.body);
+    Map<String, dynamic> user;
+
+    if (existingMembers.isNotEmpty) {
+      user = Map<String, dynamic>.from(existingMembers.first);
+    } else {
+      final newMember = {
+        'email': cleanEmail,
+        'memberId': memberId.trim().isEmpty
+            ? 'SFC-${DateTime.now().millisecondsSinceEpoch.toString().substring(8)}'
+            : memberId.trim(),
+        'role': cleanEmail == adminEmail ? 'admin' : 'member',
+        'joinedAt': DateTime.now().toIso8601String(),
+      };
+
+      final createResponse = await http.post(
+        Uri.parse('$_restUrl/members'),
+        headers: _headers(returnRepresentation: true),
+        body: jsonEncode(newMember),
+      );
+
+      if (createResponse.statusCode < 200 || createResponse.statusCode >= 300) {
+        throw Exception('Login failed');
+      }
+
+      final List<dynamic> createdMembers = jsonDecode(createResponse.body);
+      user = Map<String, dynamic>.from(createdMembers.first);
+    }
+
+    return {
+      'user': user,
+      'isAdmin': user['role'] == 'admin',
+      'message': user['role'] == 'admin'
+          ? 'Owner admin login successful.'
+          : 'Member login successful.',
+    };
   }
 
   Future<void> saveItem(
@@ -116,16 +164,22 @@ class ApiService {
   ) async {
     final String id = item['id']?.toString() ?? '';
     final bool isEditing = id.isNotEmpty;
+    final body = Map<String, dynamic>.from(item);
+
+    if (body['id']?.toString().isEmpty ?? true) {
+      body.remove('id');
+    }
+
     final response = isEditing
-        ? await http.put(
-            Uri.parse('$baseUrl/$collection/$id'),
-            headers: _adminHeaders(adminEmail),
-            body: jsonEncode(item),
+        ? await http.patch(
+            Uri.parse('$_restUrl/$collection?id=eq.$id'),
+            headers: _headers(),
+            body: jsonEncode(body..remove('id')),
           )
         : await http.post(
-            Uri.parse('$baseUrl/$collection'),
-            headers: _adminHeaders(adminEmail),
-            body: jsonEncode(item),
+            Uri.parse('$_restUrl/$collection'),
+            headers: _headers(),
+            body: jsonEncode(body),
           );
 
     if (response.statusCode < 200 || response.statusCode >= 300) {
@@ -139,8 +193,8 @@ class ApiService {
     String adminEmail,
   ) async {
     final response = await http.delete(
-      Uri.parse('$baseUrl/$collection/$id'),
-      headers: {'x-admin-email': adminEmail},
+      Uri.parse('$_restUrl/$collection?id=eq.$id'),
+      headers: _headers(),
     );
 
     if (response.statusCode < 200 || response.statusCode >= 300) {
@@ -148,8 +202,15 @@ class ApiService {
     }
   }
 
-  Map<String, String> _adminHeaders(String adminEmail) {
-    return {'Content-Type': 'application/json', 'x-admin-email': adminEmail};
+  Map<String, String> _headers({bool returnRepresentation = false}) {
+    return {
+      'Content-Type': 'application/json',
+      'apikey': supabaseAnonKey,
+      'Authorization': 'Bearer $supabaseAnonKey',
+      'Prefer': returnRepresentation
+          ? 'return=representation'
+          : 'return=minimal',
+    };
   }
 }
 
