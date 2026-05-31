@@ -1,0 +1,334 @@
+{
+  "players": [
+    {
+      "id": "p1",
+      "number": 1,
+      "name": "Ayush Giri",
+      "position": "Goalkeeper",
+      "age": 23
+    },
+    {
+      "id": "p2",
+      "number": 4,
+      "name": "Anil Neupane",
+      "position": "Defender",
+      "age": 22
+    },
+    {
+      "id": "p3",
+      "number": 5,
+      "name": "Suprim Rai",
+      "position": "Defender",
+      "age": 22
+    },
+    {
+      "id": "p4",
+      "number": 8,
+      "name": "Prashanna Bhattrai",
+      "position": "Midfielder",
+      "age": 22
+    },
+    {
+      "id": "p5",
+      "number": 10,
+      "name": "Shuvam Gautam",
+      "position": "Midfielder",
+      "age": 22
+    },
+    {
+      "id": "p6",
+      "number": 9,
+      "name": "Shri Manandhar",
+      "position": "Forward",
+      "age": 22
+    },
+    {
+      "id": "p7",
+      "number": 11,
+      "name": "Roshan Rijal",
+      "position": "Forward",
+      "age": 21
+    },
+    {
+      "id": "p8",
+      "number": 21,
+      "name": "Ishan Kafle",
+      "position": "Forward",
+      "age": 23
+    },
+    {
+      "id": "p9",
+      "number": 13,
+      "name": "Kamal Joshi",
+      "position": "Forward",
+      "age": 23
+    },
+    {
+      "id": "p10",
+      "number": 12,
+      "name": "Aasish Acharya",
+      "position": "Forward",
+      "age": 22
+    },
+    {
+      "id": "p11",
+      "number": 19,
+      "name": "Arpan B.K",
+      "position": "Forward",
+      "age": 25
+    }
+  ],
+  "matches": [
+    {
+      "id": "m1",
+      "homeTeam": "SHUVAM FC",
+      "awayTeam": "Manchester United",
+      "date": "Sunday, June 20",
+      "time": "4:30 PM",
+      "venue": "Shuvam Arena",
+      "status": "Upcoming",
+      "competition": "League",
+      "result": ""
+    },
+    {
+      "id": "m2",
+      "homeTeam": "SHUVAM FC",
+      "awayTeam": "Valley Rangers",
+      "date": "Saturday, June 8",
+      "time": "3:00 PM",
+      "venue": "City Stadium",
+      "status": "Away",
+      "competition": "Cup",
+      "result": ""
+    },
+    {
+      "id": "m3",
+      "homeTeam": "Hill Stars",
+      "awayTeam": "SHUVAM FC",
+      "date": "Friday, June 14",
+      "time": "5:15 PM",
+      "venue": "Hill Ground",
+      "status": "League",
+      "competition": "League",
+      "result": ""
+    },
+    {
+      "id": "m4",
+      "homeTeam": "SHUVAM FC",
+      "awayTeam": "River Boys",
+      "date": "Saturday, May 18",
+      "time": "4:00 PM",
+      "venue": "Shuvam Arena",
+      "status": "Result",
+      "competition": "League",
+      "result": "3 - 1"
+    },
+    {
+      "id": "m5",
+      "homeTeam": "SHUVAM FC",
+      "awayTeam": "Mountain City",
+      "date": "Sunday, May 12",
+      "time": "2:30 PM",
+      "venue": "City Stadium",
+      "status": "Result",
+      "competition": "Friendly",
+      "result": "2 - 2"
+    },
+    {
+      "id": "m6",
+      "homeTeam": "Green Valley",
+      "awayTeam": "SHUVAM FC",
+      "date": "Saturday, May 4",
+      "time": "5:00 PM",
+      "venue": "Valley Park",
+      "status": "Result",
+      "competition": "Cup",
+      "result": "0 - 1"
+    }
+  ],
+  "news": [
+    {
+      "id": "n1",
+      "title": "Training Schedule Updated",
+      "category": "Training",
+      "message": "Evening training starts at 5:30 PM every Monday, Wednesday, and Friday.",
+      "detail": "Players should arrive 15 minutes early for warm-up, hydration check, and tactical briefing."
+    },
+    {
+      "id": "n2",
+      "title": "Home Match This Sunday",
+      "category": "Match",
+      "message": "SHUVAM FC hosts Summit United at Shuvam Arena this Sunday.",
+      "detail": "Supporters are encouraged to wear blue and green. Gates open one hour before kickoff."
+    },
+    {
+      "id": "n3",
+      "title": "New Forward Joins Squad",
+      "category": "Squad",
+      "message": "SHUVAM FC welcomes young forward Anish Tamang to the senior team.",
+      "detail": "Anish brings pace, pressing, and confident finishing to the attacking unit."
+    },
+    {
+      "id": "n4",
+      "title": "Community Coaching Day",
+      "category": "Community",
+      "message": "The club will host a free youth coaching session next weekend.",
+      "detail": "Young players can learn passing, movement, teamwork, and match basics from the SHUVAM FC squad."
+    }
+  ],
+  "updates": [
+    {
+      "id": "u1",
+      "title": "Club Office Hours",
+      "message": "The club office opens from 10 AM to 4 PM on training days."
+    },
+    {
+      "id": "u2",
+      "title": "Kit Collection",
+      "message": "Members can collect new blue-green kits after Friday training."
+    }
+  ],
+  "formations": [
+    {
+      "id": "f1",
+      "name": "4-3-3",
+      "style": "Wide attack",
+      "lines": [
+        [
+          "11 Roshan",
+          "9 Shri",
+          "21 Ishan"
+        ],
+        [
+          "8 Prashanna",
+          "10 Shuvam",
+          "13 Kamal"
+        ],
+        [
+          "4 Anil",
+          "5 Suprim",
+          "19 Arpan",
+          "12 Aasish"
+        ],
+        [
+          "1 Ayush"
+        ]
+      ]
+    },
+    {
+      "id": "f2",
+      "name": "4-4-2",
+      "style": "Balanced classic",
+      "lines": [
+        [
+          "11 Roshan",
+          "9 Shri"
+        ],
+        [
+          "21 Ishan",
+          "8 Prashanna",
+          "10 Shuvam",
+          "13 Kamal"
+        ],
+        [
+          "4 Anil",
+          "5 Suprim",
+          "19 Arpan",
+          "12 Aasish"
+        ],
+        [
+          "1 Ayush"
+        ]
+      ]
+    },
+    {
+      "id": "f3",
+      "name": "3-5-2",
+      "style": "Midfield control",
+      "lines": [
+        [
+          "11 Roshan",
+          "9 Shri"
+        ],
+        [
+          "21 Ishan",
+          "8 Prashanna",
+          "10 Shuvam",
+          "13 Kamal",
+          "12 Aasish"
+        ],
+        [
+          "4 Anil",
+          "5 Suprim",
+          "19 Arpan"
+        ],
+        [
+          "1 Ayush"
+        ]
+      ]
+    },
+    {
+      "id": "f4",
+      "name": "4-2-3-1",
+      "style": "Press and create",
+      "lines": [
+        [
+          "9 Shri"
+        ],
+        [
+          "11 Roshan",
+          "10 Shuvam",
+          "21 Ishan"
+        ],
+        [
+          "8 Prashanna",
+          "13 Kamal"
+        ],
+        [
+          "4 Anil",
+          "5 Suprim",
+          "19 Arpan",
+          "12 Aasish"
+        ],
+        [
+          "1 Ayush"
+        ]
+      ]
+    },
+    {
+      "id": "f5",
+      "name": "5-3-2",
+      "style": "Defensive wall",
+      "lines": [
+        [
+          "11 Roshan",
+          "9 Shri"
+        ],
+        [
+          "8 Prashanna",
+          "10 Shuvam",
+          "13 Kamal"
+        ],
+        [
+          "4 Anil",
+          "5 Suprim",
+          "19 Arpan",
+          "12 Aasish",
+          "21 Ishan"
+        ],
+        [
+          "1 Ayush"
+        ]
+      ]
+    }
+  ],
+  "members": [
+    {
+      "id": "member_1780237426289_3268",
+      "email": "shuvamgtm11@gmail.com",
+      "memberId": "Shuvam Sir",
+      "role": "admin",
+      "joinedAt": "2026-05-31T14:23:46.290Z"
+    }
+  ]
+}
